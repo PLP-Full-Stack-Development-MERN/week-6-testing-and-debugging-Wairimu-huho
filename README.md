@@ -1,28 +1,38 @@
-# MERN Bug Tracker - Backend
+# MERN Bug Tracker
 
-This is the backend for the MERN Bug Tracker application, which demonstrates testing and debugging best practices in a MERN stack application.
+A comprehensive bug tracking application built with the MERN stack (MongoDB, Express, React, Node.js), focusing on testing and debugging best practices. This project demonstrates how to implement proper testing methodologies and debugging techniques in a full-stack JavaScript application.
 
 ## Features
 
-- RESTful API for bug tracking
-- Comprehensive error handling
-- Validation of requests
-- Logging system for debugging
-- Complete test suite with unit and integration tests
+- 🐞 Create, view, update, and delete bugs
+- 📊 Dashboard with bug statistics and visualizations
+- 🔍 Search and filter bugs by various criteria
+- 📱 Responsive design with Tailwind CSS
+- ✅ Comprehensive test suite for both frontend and backend
+- 🛠️ Robust error handling and debugging tools
 
 ## Project Structure
 
+The project is divided into two main parts:
+
 ```
-backend/
-├── config/           # Configuration files
-├── controllers/      # Route controllers
-├── middleware/       # Express middleware
-├── models/           # MongoDB models
-├── routes/           # API routes
-├── tests/            # Test files
-│   ├── integration/  # API tests
-│   └── unit/         # Unit tests
-└── utils/            # Utility functions
+mern-bug-tracker/
+├── backend/          # Express and MongoDB backend
+│   ├── config/       # Configuration files
+│   ├── controllers/  # Route controllers
+│   ├── middleware/   # Express middleware
+│   ├── models/       # MongoDB models
+│   ├── routes/       # API routes
+│   ├── tests/        # Backend tests
+│   └── utils/        # Utility functions
+│
+├── frontend/         # React frontend (Vite)
+    ├── public/       # Static files
+    └── src/          # React source code
+        ├── components/  # React components
+        ├── services/    # API services
+        ├── utils/       # Utility functions
+        └── test/        # Frontend tests
 ```
 
 ## Getting Started
@@ -30,139 +40,197 @@ backend/
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (local instance or Atlas)
+- MongoDB (local installation or Atlas account)
+- npm or yarn
 
 ### Installation
 
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/mern-bug-tracker.git
-   cd mern-bug-tracker/backend
+   cd mern-bug-tracker
    ```
 
-2. Install dependencies:
+2. Install backend dependencies:
    ```
+   cd backend
    npm install
    ```
 
-3. Set up environment variables:
-   Create a `.env` file in the root of the backend directory with the following variables:
+3. Install frontend dependencies:
+   ```
+   cd ../frontend
+   npm install
+   ```
+
+4. Set up environment variables:
+   
+   For backend, create a `.env` file in the `backend` directory:
    ```
    NODE_ENV=development
    PORT=5000
    MONGO_URI=mongodb://localhost:27017/bug-tracker
    ```
-
-4. Start the development server:
+   
+   For frontend, create a `.env` file in the `frontend` directory:
    ```
+   VITE_API_URL=http://localhost:5000/api
+   ```
+
+### Running the Application
+
+1. Start the backend server:
+   ```
+   cd backend
    npm run dev
    ```
 
+2. Start the frontend development server:
+   ```
+   cd frontend
+   npm run dev
+   ```
+
+3. Access the application:
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000/api
+
 ## Testing
 
-The backend includes a comprehensive test suite with both unit and integration tests using Jest.
-
-### Running Tests
+### Backend Tests
 
 ```bash
+cd backend
 # Run all tests
 npm test
 
 # Run tests with watch mode
 npm run test:watch
 
-# Run tests with coverage report
+# Run tests with coverage
 npm run test:coverage
 ```
 
-### Testing Strategy
+### Frontend Tests
 
-1. **Unit Tests**: Test individual functions and utilities in isolation.
-   - Located in `tests/unit/`
-   - Focus on validation logic and helper functions
+```bash
+cd frontend
+# Run all tests
+npm test
 
-2. **Integration Tests**: Test API endpoints with an in-memory MongoDB database.
-   - Located in `tests/integration/`
-   - Test the complete request/response cycle
+# Run tests with watch mode
+npm run test:watch
 
-### Test Coverage
+# Run tests with coverage
+npm run test:coverage
+```
 
-The test suite aims to cover:
-- Input validation
-- Error handling
-- Database operations
-- API responses
-- Edge cases
+## Testing Strategy
 
-## Debugging
+This project implements a comprehensive testing strategy including:
 
-### Debugging Tools
+### Backend Testing
+
+1. **Unit Tests**:
+   - Tests for individual helper functions
+   - Validation logic tests
+   - Error handling tests
+
+2. **Integration Tests**:
+   - API route tests with an in-memory MongoDB database
+   - Request validation tests
+   - Error middleware tests
+
+### Frontend Testing
+
+1. **Unit Tests**:
+   - Component rendering tests
+   - Form validation tests
+   - Utility function tests
+
+2. **Integration Tests**:
+   - API service tests with mock server
+   - Form submission tests
+   - Component interaction tests
+
+3. **End-to-End Tests** (optional):
+   - User flows from bug creation to resolution
+
+## Debugging Techniques
+
+The project demonstrates various debugging techniques:
+
+### Backend Debugging
 
 1. **Logging**:
-   - Winston logger is configured for structured logging
-   - Different log levels (error, warn, info, debug)
-   - Logs are stored in `logs/` directory in production
+   - Structured logging with Winston
+   - Different log levels for development and production
+   - Request/response logging
 
 2. **Error Handling**:
-   - Custom error middleware with proper status codes
+   - Custom error classes
+   - Centralized error middleware
    - Standardized error responses
-   - Stack traces in development environment
 
-3. **Validation**:
-   - Request validation using express-validator
-   - Mongoose schema validation
+3. **Node.js Debugging**:
+   - Using the Node.js inspector
+   - Debugging with VS Code
+   - Debug configurations
 
-### Debugging Tips
+### Frontend Debugging
 
-1. Use different log levels:
-   ```javascript
-   logger.debug('Detailed debug information');
-   logger.info('Standard operation information');
-   logger.warn('Warning condition');
-   logger.error('Error condition', error);
-   ```
+1. **React DevTools**:
+   - Component inspection
+   - State and props monitoring
+   - Performance profiling
 
-2. Use Node.js inspector:
-   ```bash
-   # Start server with inspector
-   node --inspect server.js
-   ```
+2. **Error Boundaries**:
+   - Graceful error handling in UI
+   - Fallback UI components
+   - Error reporting
 
-3. Test API endpoints with Postman or Insomnia
+3. **Network Debugging**:
+   - API request/response logging
+   - Mock server for testing
+   - Axios interceptors
 
-## API Endpoints
+4. **Console Techniques**:
+   - Structured console logs
+   - Performance measurements
+   - Conditional debugging
 
-### Bugs
+## Intentional Bugs for Learning
 
-- `GET /api/bugs` - Get all bugs (with optional filtering)
-- `GET /api/bugs/:id` - Get a specific bug
-- `POST /api/bugs` - Create a new bug
-- `PUT /api/bugs/:id` - Update a bug
-- `DELETE /api/bugs/:id` - Delete a bug
-- `GET /api/bugs/stats` - Get bug statistics
+The project includes some intentional bugs in `utils/debugExamples.js` to practice debugging techniques:
 
-## Error Handling Implementation
+1. **Array Index Out of Bounds**: Bug in loop condition
+2. **Undefined Property Access**: Missing null checks
+3. **Asynchronous Error Handling**: Inadequate Promise error handling
+4. **Logical Errors**: Incorrect calculations
+5. **Memory Leaks**: Unbounded array growth
 
-The application uses a global error handling middleware that:
+Follow the [Debugging Guide](backend/DEBUGGING.md) to learn how to identify and fix these issues.
 
-1. Logs errors appropriately
-2. Formats error responses consistently
-3. Handles different error types:
-   - Validation errors
-   - Not found errors
-   - Database errors
-   - Authentication errors
+## Code Quality and Best Practices
 
-Example error response:
-```json
-{
-  "success": false,
-  "message": "Validation Error",
-  "errors": [
-    {
-      "field": "title",
-      "message": "Title is required"
-    }
-  ]
-}
-```
+- **ESLint & Prettier**: Consistent code style
+- **Error Handling**: Comprehensive error handling
+- **Documentation**: JSDoc comments for functions and components
+- **Testing**: High test coverage
+- **Accessibility**: ARIA attributes and keyboard navigation
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+
+- [MongoDB](https://www.mongodb.com/)
+- [Express](https://expressjs.com/)
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [Jest](https://jestjs.io/) & [Vitest](https://vitest.dev/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
